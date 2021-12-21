@@ -1,17 +1,13 @@
 package main
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
+	"github.com/rikuhatano09/movieshare_api/internal/interfaces/handler"
 )
 
 func main() {
 	engine := gin.Default()
-	engine.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "hello world",
-		})
-	})
+	engine.GET("/movie", handler.GetMovie)
+
 	engine.Run(":3000")
 }
