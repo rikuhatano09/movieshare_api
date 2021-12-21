@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  movieshare-api:
+    build: .
+    depends_on:
+      - movieshare-db
+    container_name: movieshare-api
+    environment:
+      - GO_ENV=local
+      - DBMS=postgres
+      - DB_NAME=movieshare
+      - DB_HOST=host.docker.internal
+      - DB_PORT=5433
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+    volumes:
+      - ./movieshare_api:/go/src
+    command: go run cmd/main.go
+    tty: true
+    ports:
+      - "3000:3000"
+  movieshare-db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=movieshare
+    container_name: movieshare-db
+    volumes:
+      - ./movieshare_database/definition:/docker-entrypoint-initdb.d # Init database and insert initial data.
+      - ./movieshare_database/data:/var/lib/postgresql/data # Preserve data.
+    tty: true
+    ports:
+      - 5433:5432

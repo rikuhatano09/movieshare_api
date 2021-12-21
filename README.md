@@ -20,7 +20,7 @@ See modules list in `go.mod`.
     ```
 
     Server starts on localhost.
-    See "http://127.0.0.1:8000/".
+    See "http://127.0.0.1:3000/".
 
 
 ## MovieShare Database
