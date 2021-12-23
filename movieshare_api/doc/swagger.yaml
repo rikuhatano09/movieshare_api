@@ -4,7 +4,7 @@ info:
   description: "RESTful API for MovieShare"
   version: "2021-12-23T17:00:00Z"
   title: "MovieShare API"
-host: "localhost:3000"
+host: "localhost:8000"
 schemes:
   - "https"
 paths:

@@ -19,7 +19,7 @@ services:
     command: go run cmd/main.go
     tty: true
     ports:
-      - "3000:3000"
+      - "8000:8000"
   movieshare-db:
     image: postgres:latest
     environment:
