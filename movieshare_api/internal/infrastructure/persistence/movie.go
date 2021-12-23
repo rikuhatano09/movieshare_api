@@ -38,3 +38,24 @@ func (moviePersistence MoviePersistence) FindMovieAtRandom() (model.Movie, error
 	}
 	return movie, nil
 }
+
+// GetMovieList get movies under the specified conditions.
+func (moviePersistence MoviePersistence) GetMovieList(title *string) ([]model.Movie, error) {
+	movieList := []model.Movie{}
+
+	query := moviePersistence.Connection.New().Table("movie")
+
+	if title != nil {
+		query = query.Where(`"title" LIKE ?`, "%"+*title+"%")
+	}
+
+	result := query.Find(&movieList)
+
+	if result.RecordNotFound() {
+		return movieList, nil
+	}
+	if result.Error != nil {
+		return movieList, result.Error
+	}
+	return movieList, nil
+}

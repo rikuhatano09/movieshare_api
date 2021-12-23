@@ -16,6 +16,7 @@ func main() {
 		})
 	})
 	engine.GET("/movies/random", handler.GetMovieAtRandom)
+	engine.GET("/movies", handler.GetMovieList)
 
 	engine.Run(":8000")
 }
