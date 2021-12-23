@@ -27,7 +27,8 @@ func (moviePersistence MoviePersistence) FindMovieAtRandom() (model.Movie, error
 
 	result := moviePersistence.Connection.New().
 		Table("movie").
-		Take(&movie)
+		Order("random()").
+		Find(&movie)
 
 	if result.RecordNotFound() {
 		return movie, nil
