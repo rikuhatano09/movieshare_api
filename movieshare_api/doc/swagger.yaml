@@ -1,0 +1,101 @@
+---
+swagger: "2.0"
+info:
+  description: "RESTful API for MovieShare"
+  version: "2021-12-23T17:00:00Z"
+  title: "MovieShare API"
+host: "localhost:3000"
+schemes:
+  - "https"
+paths:
+  /:
+    get:
+      responses:
+        200:
+          description: "Check healthy"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+                example: "Hello MovieShare"
+      security:
+        - api_key: []
+  /movies:
+    post:
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/movieRequestBody"
+      responses:
+        200:
+          description: "Create a movie"
+          schema:
+            $ref: "#/definitions/movieResponse"
+      security:
+        - api_key: []
+  /movies/random:
+    get:
+      responses:
+        200:
+          description: "Get a movie at random"
+          schema:
+            $ref: "#/definitions/movieResponse"
+      security:
+        - api_key: []
+  /movies/{id}:
+    get:
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "Get a movie by id"
+          schema:
+            $ref: "#/definitions/movieResponse"
+      security:
+        - api_key: []
+definitions:
+  movieResponse:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+        example: 1
+      title:
+        type: "string"
+        example: "title"
+      overview:
+        type: "string"
+        example: "overview"
+      genre:
+        type: "string"
+        example: "genre"
+      youtubeLinkUrl:
+        type: "string"
+        example: "https://www.youtube.com/"
+  movieRequestBody:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+        example: "title"
+      overview:
+        type: "string"
+        example: "overview"
+      genre:
+        type: "string"
+        example: "genre"
+      youtubeLinkUrl:
+        type: "string"
+        example: "https://www.youtube.com/"
+securityDefinitions:
+  api_key:
+    type: "apiKey"
+    name: "x-api-key"
+    in: "header"
