@@ -5,13 +5,13 @@ import (
 	"github.com/rikuhatano09/movieshare_api/pkg/domain/model"
 )
 
-func GetMovie() model.Movie {
+func GetMovieAtRandom() (model.Movie, error) {
 	moviePersistence := persistence.NewMoviePersistence()
 
 	movie, error := moviePersistence.FindMovieAtRandom()
 
 	if error != nil {
-		panic(error)
+		return model.Movie{}, error
 	}
-	return movie
+	return movie, nil
 }
