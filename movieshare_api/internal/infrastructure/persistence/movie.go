@@ -40,7 +40,7 @@ func (moviePersistence MoviePersistence) FindMovieAtRandom() (model.Movie, error
 }
 
 // GetMovieList get movies under the specified conditions.
-func (moviePersistence MoviePersistence) GetMovieList(title *string, genre *string, user_id *string) ([]model.Movie, error) {
+func (moviePersistence MoviePersistence) GetMovieList(title *string, genre *string, userId *string) ([]model.Movie, error) {
 	movieList := []model.Movie{}
 
 	query := moviePersistence.Connection.New().Table("movie")
@@ -51,8 +51,8 @@ func (moviePersistence MoviePersistence) GetMovieList(title *string, genre *stri
 	if genre != nil {
 		query = query.Where("genre = ?", *genre)
 	}
-	if user_id != nil {
-		query = query.Where("user_id = ?", *user_id)
+	if userId != nil {
+		query = query.Where("user_id = ?", *userId)
 	}
 
 	result := query.Find(&movieList)

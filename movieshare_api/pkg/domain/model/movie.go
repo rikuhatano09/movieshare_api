@@ -3,7 +3,7 @@ package model
 type (
 	Movie struct {
 		ID                  uint64  `json:"id" gorm:"column:id;type:bigserial;not null;primary_key"`
-		UserID              string  `json:"user_id" gorm:"column:user_id;type:text;not null"`
+		UserID              string  `json:"userId" gorm:"column:user_id;type:text;not null"`
 		Title               string  `json:"title" gorm:"column:title;type:text;not null"`
 		Overview            string  `json:"overview" gorm:"column:overview;type:text;not null"`
 		Genre               string  `json:"genre" gorm:"column:genre;type:text;not null"`
