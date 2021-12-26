@@ -35,7 +35,7 @@ paths:
         - name: "userId"
           in: "query"
           required: false
-          type: "number"
+          type: "string"
       responses:
         200:
           description: "Get movies"
@@ -106,10 +106,16 @@ definitions:
         type: "integer"
         format: "int64"
         example: 1
+      createdAt:
+        type: "string"
+        format: "date-time"
+        example: "2000-01-01T00:00:00Z"
       userId:
-        type: "integer"
-        format: "int64"
-        example: 1
+        type: "string"
+        example: "userId"
+      userName:
+        type: "string"
+        example: "userName"
       title:
         type: "string"
         example: "title"
@@ -121,9 +127,11 @@ definitions:
         example: "genre"
       youtubeLinkUrl:
         type: "string"
+        format: "url"
         example: "https://www.youtube.com/"
       youtubeThumbnailUrl:
         type: "string"
+        format: "url"
         example: "https://www.youtube.com/"
       grinningScore:
         type: "integer"
@@ -133,9 +141,11 @@ definitions:
     type: "object"
     properties:
       userId:
-        type: "integer"
-        format: "int64"
-        example: 1
+        type: "string"
+        example: "userId"
+      userName:
+        type: "string"
+        example: "userName"
       title:
         type: "string"
         example: "title"
@@ -147,6 +157,7 @@ definitions:
         example: "genre"
       youtubeLinkUrl:
         type: "string"
+        format: "url"
         example: "https://www.youtube.com/"
   moviePutRequestBody:
     type: "object"

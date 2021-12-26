@@ -44,6 +44,7 @@ func CreateMovie(requestBody contract.MoviePostRequestBody) (model.Movie, error)
 
 	movie := model.Movie{
 		UserID:         requestBody.UserID,
+		UserName:       requestBody.UserName,
 		Title:          requestBody.Title,
 		Overview:       requestBody.Overview,
 		Genre:          requestBody.Genre,
