@@ -23,8 +23,9 @@ func GetMovieAtRandom(context *gin.Context) {
 
 func GetMovieList(context *gin.Context) {
 	title := convertStringToStringPointer(context.Query("title"))
-
-	movieList, error := usecase.GetMovieList(title)
+	genre := convertStringToStringPointer(context.Query("genre"))
+	user_id := convertStringToStringPointer(context.Query("userId"))
+	movieList, error := usecase.GetMovieList(title, genre, user_id)
 	if error != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{
 			"message": fmt.Sprintf("Internal server error: %s", error.Error()),
