@@ -16,10 +16,10 @@ func GetMovieAtRandom() (model.Movie, error) {
 	return movie, nil
 }
 
-func GetMovieList(title *string) ([]model.Movie, error) {
+func GetMovieList(title *string, genre *string, userId *string) ([]model.Movie, error) {
 	moviePersistence := persistence.NewMoviePersistence()
 
-	movieList, error := moviePersistence.GetMovieList(title)
+	movieList, error := moviePersistence.GetMovieList(title, genre, userId)
 
 	if error != nil {
 		return []model.Movie{}, error
