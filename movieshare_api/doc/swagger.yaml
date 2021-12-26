@@ -28,13 +28,21 @@ paths:
           in: "query"
           required: false
           type: "string"
+        - name: "genre"
+          in: "query"
+          required: false
+          type: "string"
+        - name: "userId"
+          in: "query"
+          required: false
+          type: "number"
       responses:
         200:
           description: "Get movies"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/movieResponseWithThumbnail"
+              $ref: "#/definitions/movieResponse"
       security:
         - api_key: []
     post:
@@ -43,7 +51,7 @@ paths:
         in: "body"
         required: true
         schema:
-          $ref: "#/definitions/movieRequestBody"
+          $ref: "#/definitions/moviePostRequestBody"
       responses:
         200:
           description: "Create a movie"
@@ -74,6 +82,22 @@ paths:
             $ref: "#/definitions/movieResponse"
       security:
         - api_key: []
+    put:
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "number"
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/moviePutRequestBody" 
+      responses:
+        200:
+          description: "Update a movie by id"
+          schema:
+            $ref: "#/definitions/movieResponse"
 definitions:
   movieResponse:
     type: "object"
@@ -82,22 +106,7 @@ definitions:
         type: "integer"
         format: "int64"
         example: 1
-      title:
-        type: "string"
-        example: "title"
-      overview:
-        type: "string"
-        example: "overview"
-      genre:
-        type: "string"
-        example: "genre"
-      youtubeLinkUrl:
-        type: "string"
-        example: "https://www.youtube.com/"
-  movieResponseWithThumbnail:
-    type: "object"
-    properties:
-      id:
+      userId:
         type: "integer"
         format: "int64"
         example: 1
@@ -116,9 +125,17 @@ definitions:
       youtubeThumbnailUrl:
         type: "string"
         example: "https://www.youtube.com/"
-  movieRequestBody:
+      grinningScore:
+        type: "integer"
+        format: "int64"
+        example: 5
+  moviePostRequestBody:
     type: "object"
     properties:
+      userId:
+        type: "integer"
+        format: "int64"
+        example: 1
       title:
         type: "string"
         example: "title"
@@ -131,6 +148,13 @@ definitions:
       youtubeLinkUrl:
         type: "string"
         example: "https://www.youtube.com/"
+  moviePutRequestBody:
+    type: "object"
+    properties:
+      grinningScore:
+        type: "integer"
+        format: "int64"
+        example: 5
 securityDefinitions:
   api_key:
     type: "apiKey"
