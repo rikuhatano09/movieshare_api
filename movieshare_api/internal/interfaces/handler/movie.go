@@ -74,3 +74,33 @@ func CreateMovie(context *gin.Context) {
 	}
 	context.JSON(http.StatusOK, movie)
 }
+
+func PutMovie(context *gin.Context) {
+	id, error := strconv.ParseUint(context.Param("id"), 10, 64)
+	if error != nil {
+		context.JSON(http.StatusBadRequest, gin.H{
+			"message": fmt.Sprintf("Bad request error: %s", error.Error()),
+		})
+		return
+	}
+	requestBody := contract.MoviePutRequestBody{}
+
+	error = context.ShouldBindJSON(&requestBody)
+	if error != nil {
+		context.JSON(http.StatusBadRequest, gin.H{
+			"message": fmt.Sprintf("Bad request error: %s", error.Error()),
+		})
+		fmt.Println("aa")
+		return
+	}
+
+	movie, error := usecase.PutMovie(requestBody, id)
+	if error != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{
+			"message": fmt.Sprintf("Internal server error: %s", error.Error()),
+		})
+		return
+	}
+	context.JSON(http.StatusOK, movie)
+
+}

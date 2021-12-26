@@ -9,4 +9,9 @@ type (
 		Genre          string `json:"genre"`
 		YouTubeLinkURL string `json:"youtubeLinkUrl"`
 	}
+
+	// MoviePostRequestBody is request body for creating a movie.
+	MoviePutRequestBody struct {
+		GrinningScore *uint32 `json:"grinningScore"`
+	}
 )

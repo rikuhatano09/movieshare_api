@@ -8,5 +8,6 @@ type (
 		CreateMovie(model.Movie) (model.Movie, error)
 		GetMovieList(*string, *string, *string) ([]model.Movie, error)
 		GetMovieID(uint64) (model.Movie, error)
+		PutMovie(model.Movie, uint64) (model.Movie, error)
 	}
 )
