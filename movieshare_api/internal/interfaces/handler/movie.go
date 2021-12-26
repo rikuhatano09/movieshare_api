@@ -6,6 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
+	"github.com/rikuhatano09/movieshare_api/pkg/domain/contract"
 	"github.com/rikuhatano09/movieshare_api/pkg/usecase"
 )
 
@@ -31,4 +32,25 @@ func GetMovieList(context *gin.Context) {
 		return
 	}
 	context.JSON(http.StatusOK, movieList)
+}
+
+func CreateMovie(context *gin.Context) {
+	requestBody := contract.MoviePostRequestBody{}
+
+	error := context.ShouldBindJSON(&requestBody)
+	if error != nil {
+		context.JSON(http.StatusBadRequest, gin.H{
+			"message": fmt.Sprintf("Bad request error: %s", error.Error()),
+		})
+		return
+	}
+
+	movie, error := usecase.CreateMovie(requestBody)
+	if error != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{
+			"message": fmt.Sprintf("Internal server error: %s", error.Error()),
+		})
+		return
+	}
+	context.JSON(http.StatusOK, movie)
 }
