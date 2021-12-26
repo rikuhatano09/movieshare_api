@@ -35,19 +35,19 @@ func GetMovieList(context *gin.Context) {
 }
 
 func GetMovieByID(context *gin.Context) {
-	ID, error := strconv.ParseUint(context.Param("id"), 10, 64)
+	id, error := strconv.ParseUint(context.Param("id"), 10, 64)
 	if error != nil {
 		context.JSON(http.StatusBadRequest, gin.H{
 			"message": fmt.Sprintf("Bad request error: %s", error.Error()),
 		})
 		return
 	}
-	movieID, error := usecase.GetMovieID(ID)
+	movie, error := usecase.GetMovieID(id)
 	if error != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{
 			"message": fmt.Sprintf("Internal server error: %s", error.Error()),
 		})
 		return
 	}
-	context.JSON(http.StatusOK, movieID)
+	context.JSON(http.StatusOK, movie)
 }
