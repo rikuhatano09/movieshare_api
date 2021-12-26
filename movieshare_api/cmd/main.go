@@ -42,11 +42,8 @@ func main() {
 	})
 	engine.GET("/movies/random", handler.GetMovieAtRandom)
 	engine.GET("/movies", handler.GetMovieList)
-<<<<<<< HEAD
-	engine.POST("/movies", handler.CreateMovie)
-=======
 	engine.GET("/movies/:id", handler.GetMovieByID)
->>>>>>> master
+	engine.POST("/movies", handler.CreateMovie)
 
 	engine.Run(":8000")
 }
