@@ -4,7 +4,7 @@ CREATE TABLE    IF NOT EXISTS "public"."movie" (
     "id"                    BIGSERIAL                NOT NULL,
     "created_at"            TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
     "updated_at"            TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
-    "user_id"               BIGINT                   NOT NULL,
+    "user_id"               TEXT                     NOT NULL,
     "title"                 TEXT                     NOT NULL CHECK (CHARACTER_LENGTH("title") > 0),
     "overview"              TEXT                     NOT NULL CHECK (CHARACTER_LENGTH("overview") > 0),
     "genre"                 TEXT                     NOT NULL CHECK (CHARACTER_LENGTH("genre") > 0),

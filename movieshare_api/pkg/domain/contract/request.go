@@ -3,7 +3,7 @@ package contract
 type (
 	// MoviePostRequestBody is request body for creating a movie.
 	MoviePostRequestBody struct {
-		UserID         uint64 `json:"userId"`
+		UserID         string `json:"userId"`
 		Title          string `json:"title"`
 		Overview       string `json:"overview"`
 		Genre          string `json:"genre"`

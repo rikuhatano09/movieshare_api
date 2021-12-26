@@ -17,15 +17,26 @@ func GetMovieAtRandom() (model.Movie, error) {
 	return movie, nil
 }
 
-func GetMovieList(title *string) ([]model.Movie, error) {
+func GetMovieList(title *string, genre *string, userId *string) ([]model.Movie, error) {
 	moviePersistence := persistence.NewMoviePersistence()
 
-	movieList, error := moviePersistence.GetMovieList(title)
+	movieList, error := moviePersistence.GetMovieList(title, genre, userId)
 
 	if error != nil {
 		return []model.Movie{}, error
 	}
 	return movieList, nil
+}
+
+func GetMovieID(id uint64) (model.Movie, error) {
+	moviePersistence := persistence.NewMoviePersistence()
+
+	movie, error := moviePersistence.GetMovieID(id)
+
+	if error != nil {
+		return model.Movie{}, error
+	}
+	return movie, nil
 }
 
 func CreateMovie(requestBody contract.MoviePostRequestBody) (model.Movie, error) {
