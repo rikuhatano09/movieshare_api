@@ -6,10 +6,10 @@ import (
 	"github.com/rikuhatano09/movieshare_api/pkg/domain/model"
 )
 
-func GetMovieAtRandom() (model.Movie, error) {
+func GetMovieAtRandom(genre *string) (model.Movie, error) {
 	moviePersistence := persistence.NewMoviePersistence()
 
-	movie, error := moviePersistence.FindMovieAtRandom()
+	movie, error := moviePersistence.FindMovieAtRandom(genre)
 
 	if error != nil {
 		return model.Movie{}, error

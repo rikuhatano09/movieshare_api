@@ -12,7 +12,9 @@ import (
 )
 
 func GetMovieAtRandom(context *gin.Context) {
-	movie, error := usecase.GetMovieAtRandom()
+	genre := convertStringToStringPointer(context.Query("genre"))
+
+	movie, error := usecase.GetMovieAtRandom(genre)
 	if error != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{
 			"message": fmt.Sprintf("Internal server error: %s", error.Error()),

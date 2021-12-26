@@ -22,13 +22,16 @@ func NewMoviePersistence() repository.MovieRepository {
 }
 
 // FindMovieAtRandom find a movie at random.
-func (moviePersistence MoviePersistence) FindMovieAtRandom() (model.Movie, error) {
+func (moviePersistence MoviePersistence) FindMovieAtRandom(genre *string) (model.Movie, error) {
 	movie := model.Movie{}
 
-	result := moviePersistence.Connection.New().
-		Table("movie").
-		Order("random()").
-		Find(&movie)
+	query := moviePersistence.Connection.New().Table("movie")
+
+	if genre != nil {
+		query = query.Where(`"genre" = ?`, *genre)
+	}
+
+	result := query.Order("random()").Find(&movie)
 
 	if result.RecordNotFound() {
 		return movie, nil
