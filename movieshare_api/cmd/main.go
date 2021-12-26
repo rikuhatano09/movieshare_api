@@ -14,7 +14,15 @@ func main() {
 
 	// Set CORS config.
 	corsConfig := cors.DefaultConfig()
-	corsConfig.AllowAllOrigins = true
+	corsConfig.AllowOrigins = []string{
+		"http://localhost",
+	}
+	corsConfig.AllowMethods = []string{
+		"GET",
+		"POST",
+		"PUT",
+		"OPTIONS",
+	}
 	engine.Use(cors.New(corsConfig))
 
 	engine.GET("/", func(context *gin.Context) {
