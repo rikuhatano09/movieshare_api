@@ -59,3 +59,20 @@ func (moviePersistence MoviePersistence) GetMovieList(title *string) ([]model.Mo
 	}
 	return movieList, nil
 }
+
+func (moviePersistence MoviePersistence) GetMovieID(id uint64) (model.Movie, error) {
+	movie := model.Movie{}
+
+	result := moviePersistence.Connection.New().
+		Table("movie").
+		Where("id = ?", id).
+		Find(&movie)
+
+	if result.RecordNotFound() {
+		return movie, nil
+	}
+	if result.Error != nil {
+		return movie, result.Error
+	}
+	return movie, nil
+}

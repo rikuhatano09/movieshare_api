@@ -6,5 +6,6 @@ type (
 	MovieRepository interface {
 		FindMovieAtRandom() (model.Movie, error)
 		GetMovieList(*string) ([]model.Movie, error)
+		GetMovieID(uint64) (model.Movie, error)
 	}
 )

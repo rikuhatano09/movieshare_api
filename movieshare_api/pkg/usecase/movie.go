@@ -26,3 +26,14 @@ func GetMovieList(title *string) ([]model.Movie, error) {
 	}
 	return movieList, nil
 }
+
+func GetMovieID(id uint64) (model.Movie, error) {
+	moviePersistence := persistence.NewMoviePersistence()
+
+	movie, error := moviePersistence.GetMovieID(id)
+
+	if error != nil {
+		return model.Movie{}, error
+	}
+	return movie, nil
+}
