@@ -125,14 +125,9 @@ definitions:
       genre:
         type: "string"
         example: "genre"
-      youtubeLinkUrl:
+      youtubeTitleId:
         type: "string"
-        format: "url"
-        example: "https://www.youtube.com/"
-      youtubeThumbnailUrl:
-        type: "string"
-        format: "url"
-        example: "https://www.youtube.com/"
+        example: "youtubeTitleId"
       grinningScore:
         type: "integer"
         format: "int64"
@@ -155,10 +150,9 @@ definitions:
       genre:
         type: "string"
         example: "genre"
-      youtubeLinkUrl:
+      youtubeTitleId:
         type: "string"
-        format: "url"
-        example: "https://www.youtube.com/"
+        example: "youtubeTitleId"
   moviePutRequestBody:
     type: "object"
     properties:

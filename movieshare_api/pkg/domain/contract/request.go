@@ -8,6 +8,6 @@ type (
 		Title          string `json:"title"`
 		Overview       string `json:"overview"`
 		Genre          string `json:"genre"`
-		YouTubeLinkURL string `json:"youtubeLinkUrl"`
+		YouTubeTitleID string `json:"youtubeTitleId"`
 	}
 )

@@ -44,7 +44,7 @@ func GetMovieByID(context *gin.Context) {
 		})
 		return
 	}
-	movie, error := usecase.GetMovieID(id)
+	movie, error := usecase.GetMovieByID(id)
 	if error != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{
 			"message": fmt.Sprintf("Internal server error: %s", error.Error()),

@@ -9,8 +9,7 @@ CREATE TABLE    IF NOT EXISTS "public"."movie" (
     "title"                 TEXT                     NOT NULL CHECK (CHARACTER_LENGTH("title") > 0),
     "overview"              TEXT                     NOT NULL CHECK (CHARACTER_LENGTH("overview") > 0),
     "genre"                 TEXT                     NOT NULL CHECK (CHARACTER_LENGTH("genre") > 0),
-    "youtube_link_url"      TEXT                     NOT NULL CHECK (CHARACTER_LENGTH("youtube_link_url") > 0),
-    "youtube_thumbnail_url" TEXT                     NOT NULL CHECK (CHARACTER_LENGTH("youtube_thumbnail_url") > 0),
+    "youtube_title_id"      TEXT                     NOT NULL CHECK (CHARACTER_LENGTH("youtube_title_id") > 0),
     "grinning_score"        INTEGER                           CHECK ("grinning_score" > 0),
     PRIMARY KEY ("id")
 );

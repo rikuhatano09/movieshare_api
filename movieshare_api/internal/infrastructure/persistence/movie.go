@@ -78,7 +78,7 @@ func (moviePersistence MoviePersistence) CreateMovie(movie model.Movie) (model.M
 	return movie, nil
 }
 
-func (moviePersistence MoviePersistence) GetMovieID(id uint64) (model.Movie, error) {
+func (moviePersistence MoviePersistence) GetMovieByID(id uint64) (model.Movie, error) {
 	movie := model.Movie{}
 
 	result := moviePersistence.Connection.New().

@@ -28,10 +28,10 @@ func GetMovieList(title *string, genre *string, userId *string) ([]model.Movie, 
 	return movieList, nil
 }
 
-func GetMovieID(id uint64) (model.Movie, error) {
+func GetMovieByID(id uint64) (model.Movie, error) {
 	moviePersistence := persistence.NewMoviePersistence()
 
-	movie, error := moviePersistence.GetMovieID(id)
+	movie, error := moviePersistence.GetMovieByID(id)
 
 	if error != nil {
 		return model.Movie{}, error
@@ -48,11 +48,9 @@ func CreateMovie(requestBody contract.MoviePostRequestBody) (model.Movie, error)
 		Title:          requestBody.Title,
 		Overview:       requestBody.Overview,
 		Genre:          requestBody.Genre,
-		YouTubeLinkURL: requestBody.YouTubeLinkURL,
+		YouTubeTitleID: requestBody.YouTubeTitleID,
 		GrinningScore:  nil,
 	}
-
-	movie.YouTubeThumbnailURL = movie.GetYouTubeThumbnailURL()
 
 	movie, error := moviePersistence.CreateMovie(movie)
 

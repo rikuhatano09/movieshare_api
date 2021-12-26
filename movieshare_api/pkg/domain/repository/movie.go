@@ -7,6 +7,6 @@ type (
 		FindMovieAtRandom() (model.Movie, error)
 		CreateMovie(model.Movie) (model.Movie, error)
 		GetMovieList(*string, *string, *string) ([]model.Movie, error)
-		GetMovieID(uint64) (model.Movie, error)
+		GetMovieByID(uint64) (model.Movie, error)
 	}
 )

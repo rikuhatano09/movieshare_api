@@ -1,9 +1,15 @@
 -- Movie
 INSERT INTO "public"."movie"
-    ("user_id", "user_name", "title", "overview", "genre", "youtube_link_url", "youtube_thumbnail_url", "grinning_score")
+    ("user_id", "user_name", "title", "overview", "genre", "youtube_title_id", "grinning_score")
 VALUES
-    ('user_id_1', 'user_name_1', 'マトリックス レザレクションズ', 'この冬、マトリックスが世界を変える！主演キアヌ・リーブスが人生をかけて挑む、全世界で空前の社会現象を巻き起こした今世紀最大のアクション超大作新章！', 'SF', 'https://www.youtube.com/watch?v=8PwqzRR3Oo0', 'https://i.ytimg.com/vi/8PwqzRR3Oo0/mqdefault.jpg', NULL),
-    ('user_id_2', 'user_name_2', 'ジョーカー', '「どんな時も笑顔で人々を楽しませなさい」という母の言葉を胸にコメディアンを夢見る、孤独だが心優しいアーサー。', 'サスペンス', 'https://www.youtube.com/watch?v=C3nQcMM5fS4', 'https://i.ytimg.com/vi/C3nQcMM5fS4/mqdefault.jpg', NULL),
-    ('user_id_3', 'user_name_3', 'ダークナイト', 'アメコミ映画を変えた、あの伝説を劇場で体感せよ！', 'アクション', 'https://www.youtube.com/watch?v=2gnl7JxTC0g', 'https://i.ytimg.com/vi/2gnl7JxTC0g/mqdefault.jpg', NULL),
-    ('user_id_4', 'user_name_4', 'インターステラー', 'クリストファー・ノーラン監督待望の最新作『インターステラー』は、新たに発見された宇宙のワームホールを利用し、惑星間を旅する人類の限界を超越した冒険を追っていくストーリーが描かれる。ノーランの原案と、ジョナサン・ノーランの既存の脚本を融合させたプロットを基に、最終的な脚本が作られた。', 'SF', 'https://www.youtube.com/watch?v=qZZ9jRan9eo', 'https://i.ytimg.com/vi/qZZ9jRan9eo/mqdefault.jpg', NULL)
+    ('user_id_1', 'user_name_1', 'マトリックス レザレクションズ', 'この冬、マトリックスが世界を変える！主演キアヌ・リーブスが人生をかけて挑む、全世界で空前の社会現象を巻き起こした今世紀最大のアクション超大作新章！', 'アクション映画', '8PwqzRR3Oo0', NULL),
+    ('user_id_2', 'user_name_2', 'ジョーカー', '「どんな時も笑顔で人々を楽しませなさい」という母の言葉を胸にコメディアンを夢見る、孤独だが心優しいアーサー。', 'ミステリー映画', 'C3nQcMM5fS4', NULL),
+    ('user_id_3', 'user_name_3', 'ダークナイト', 'アメコミ映画を変えた、あの伝説を劇場で体感せよ！', 'アクション映画', '2gnl7JxTC0g', NULL),
+    ('user_id_4', 'user_name_4', 'インターステラー', 'クリストファー・ノーラン監督待望の最新作『インターステラー』は、新たに発見された宇宙のワームホールを利用し、惑星間を旅する人類の限界を超越した冒険を追っていくストーリーが描かれる。ノーランの原案と、ジョナサン・ノーランの既存の脚本を融合させたプロットを基に、最終的な脚本が作られた。', 'ファンタジー映画', 'qZZ9jRan9eo', NULL),
+    ('user_id_1', 'user_name_1', 'コーダ　あいのうた', '耳の不自由な家族の中で唯一耳が聞こえる少女が歌の才能を認められたことをきっかけに、夢と現実のはざまで葛藤するドラマ。', '恋愛映画', 'JF7GR2UMmtk', NULL),
+    ('user_id_1', 'user_name_1', '東京リベンジャーズ', 'アニメ化もされた、和久井健のコミック「東京卍リベンジャーズ」を原作にしたSFアクション。', 'その他', 'TRziJGzIg-U', NULL),
+    ('user_id_2', 'user_name_2', '嘘喰い', '嘘を見破れなければ、即死。 史上最恐の騙し合いゲーム、開宴！', 'その他', 'eqMCl2RKxJ4', NULL),
+    ('user_id_3', 'user_name_3', 'アンチャーテッド', '映画『アンチャーテッド』2022年全国の映画館で公開！', 'アドベンチャー映画', 'Me5Cgw32R2E', NULL),
+    ('user_id_4', 'user_name_4', 'ノイズ', '藤原竜也×松山ケンイチが殺人の共犯者に！', 'ホラー映画', 'JK5HdjF5rq0', NULL),
+    ('user_id_4', 'user_name_4', 'エターナルズ', '＜アベンジャーズ＞の後を継ぐ、最強ヒーローチーム＜エターナルズ＞始動', 'アクション映画', 'OIDbp-u7Qmo', NULL)
 ;
