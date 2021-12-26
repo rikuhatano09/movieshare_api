@@ -61,6 +61,11 @@ paths:
         - api_key: []
   /movies/random:
     get:
+      parameters:
+        - name: "genre"
+          in: "query"
+          required: false
+          type: "string"
       responses:
         200:
           description: "Get a movie at random"
