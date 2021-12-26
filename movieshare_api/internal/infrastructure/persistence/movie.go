@@ -66,6 +66,18 @@ func (moviePersistence MoviePersistence) GetMovieList(title *string, genre *stri
 	return movieList, nil
 }
 
+// GetMovieList get movies under the specified conditions.
+func (moviePersistence MoviePersistence) CreateMovie(movie model.Movie) (model.Movie, error) {
+	result := moviePersistence.Connection.New().
+		Table("movie").
+		Create(&movie)
+
+	if result.Error != nil {
+		return movie, result.Error
+	}
+	return movie, nil
+}
+
 func (moviePersistence MoviePersistence) GetMovieID(id uint64) (model.Movie, error) {
 	movie := model.Movie{}
 
