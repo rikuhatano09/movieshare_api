@@ -98,15 +98,18 @@ func (moviePersistence MoviePersistence) GetMovieByID(id uint64) (model.Movie, e
 	return movie, nil
 }
 
-func (moviePersistence MoviePersistence) PutMovie(movie model.Movie, id uint64) (model.Movie, error) {
-
+func (moviePersistence MoviePersistence) PutMovie(grinningScore *uint32, id uint64) (model.Movie, error) {
+	movie := model.Movie{ID: id}
 	result := moviePersistence.Connection.New().
-		Table("movie").
-		Where("id = ?", id).
-		Update("grinning_score", movie.GrinningScore)
-
+		Model(&movie).
+		Update("grinning_score", grinningScore)
 	if result.Error != nil {
 		return movie, result.Error
 	}
+	movie, error := moviePersistence.GetMovieByID(id)
+	if error != nil {
+		return movie, error
+	}
+
 	return movie, nil
 }

@@ -92,7 +92,7 @@ func PutMovie(context *gin.Context) {
 		context.JSON(http.StatusBadRequest, gin.H{
 			"message": fmt.Sprintf("Bad request error: %s", error.Error()),
 		})
-		fmt.Println("aa")
+
 		return
 	}
 

@@ -44,7 +44,7 @@ func main() {
 	engine.GET("/movies", handler.GetMovieList)
 	engine.GET("/movies/:id", handler.GetMovieByID)
 	engine.POST("/movies", handler.CreateMovie)
-	engine.PUT("/movies:id", handler.PutMovie)
+	engine.PUT("/movies/:id", handler.PutMovie)
 
 	engine.Run(":8000")
 }
