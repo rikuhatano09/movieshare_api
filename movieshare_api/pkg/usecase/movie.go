@@ -59,3 +59,15 @@ func CreateMovie(requestBody contract.MoviePostRequestBody) (model.Movie, error)
 	}
 	return movie, nil
 }
+
+func PutMovie(requestBody contract.MoviePutRequestBody, id uint64) (model.Movie, error) {
+	moviePersistence := persistence.NewMoviePersistence()
+
+	movie, error := moviePersistence.PutMovie(requestBody.GrinningScore, id)
+
+	if error != nil {
+		return model.Movie{}, error
+	}
+	return movie, nil
+
+}

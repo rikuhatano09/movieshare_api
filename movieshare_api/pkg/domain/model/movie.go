@@ -17,3 +17,7 @@ type (
 		GrinningScore  *uint32   `json:"grinningScore" gorm:"column:grinning_score;type:integer"`
 	}
 )
+
+func (Movie) TableName() string {
+	return "movie"
+}
