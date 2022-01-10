@@ -33,3 +33,5 @@ services:
     tty: true
     ports:
       - 5433:5432
+
+# for production
