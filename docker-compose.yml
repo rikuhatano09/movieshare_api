@@ -19,9 +19,10 @@ services:
     command: go run cmd/main.go
     tty: true
     ports:
-      - "8000:8000"
+      - "8000"
   movieshare-db:
     image: postgres:latest
+    restart: always
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -33,5 +34,11 @@ services:
     tty: true
     ports:
       - 5433:5432
+  nginx:
+    build: ./nginx
+    container_name: movieshare-proxy
+    ports:
+      - "80:80"
+
 
 # for production
