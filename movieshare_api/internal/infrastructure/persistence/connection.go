@@ -21,7 +21,6 @@ func getDBConnection() *gorm.DB {
 		connection, error = gorm.Open(getDBConfig())
 		if error != nil {
 			panic("failed to connect to the database")
-			fmt.Println("db error", error)
 		}
 	}
 

@@ -10,8 +10,8 @@ services:
       - GO_ENV=local
       - DBMS=postgres
       - DB_NAME=movieshare
-      - DB_HOST=host.docker.internal
-      - DB_PORT=5433
+      - DB_HOST=movieshare-db
+      - DB_PORT=5432
       - DB_USER=postgres
       - DB_PASSWORD=postgres
     volumes:
@@ -19,10 +19,11 @@ services:
     command: go run cmd/main.go
     tty: true
     ports:
-      - "8000"
+      - "8000:8000"
   movieshare-db:
     image: postgres:latest
     restart: always
+    hostname: movieshare-db
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -33,9 +34,12 @@ services:
       - ./movieshare_database/data:/var/lib/postgresql/data # Preserve data.
     tty: true
     ports:
-      - 5433:5432
+      - 5432:5432
   nginx:
     build: ./nginx
+    restart: always
+    depends_on:
+      - movieshare-api
     container_name: movieshare-proxy
     ports:
       - "80:80"
