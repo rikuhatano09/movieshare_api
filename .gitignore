@@ -19,3 +19,4 @@ movieshare_database/data
 
 certbot/
 *.pem
+.env

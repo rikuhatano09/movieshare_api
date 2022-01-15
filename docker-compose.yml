@@ -7,13 +7,13 @@ services:
       - movieshare-db
     container_name: movieshare-api
     environment:
-      - GO_ENV=local
-      - DBMS=postgres
-      - DB_NAME=movieshare
-      - DB_HOST=movieshare-db
-      - DB_PORT=5432
-      - DB_USER=postgres
-      - DB_PASSWORD=postgres
+      - "GO_ENV=${GO_ENV}"
+      - "DBMS=${DBMS}"
+      - "DB_NAME=${DB_NAME}"
+      - "DB_HOST=${DB_HOST}"
+      - "DB_PORT=${DB_PORT}"
+      - "DB_USER=${DB_USER}"
+      - "DB_PASSWORD=${DB_PASSWORD}"
     volumes:
       - ./movieshare_api:/go/src
     command: go run cmd/main.go
@@ -25,9 +25,9 @@ services:
     restart: always
     hostname: movieshare-db
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=movieshare
+      - "POSTGRES_USER=${DB_USER}"
+      - "POSTGRES_PASSWORD=${DB_PASSWORD}"
+      - "POSTGRES_DB=${DB_NAME}"
     container_name: movieshare-db
     volumes:
       - ./movieshare_database/definition:/docker-entrypoint-initdb.d # Init database and insert initial data.
@@ -54,7 +54,7 @@ services:
     volumes:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
-    command: certonly --webroot -w /var/www/certbot --force-renewal --email hiroki11hanada@gmail.com -d www.mshare-api.com -d mshare-api.com --agree-tos
+    command: "certonly --webroot -w /var/www/certbot --force-renewal --email ${EMAIL} -d www.${DOMAIN} -d ${DOMAIN} --agree-tos"
     depends_on: 
       - nginx
 # for production
