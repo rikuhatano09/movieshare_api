@@ -36,13 +36,25 @@ services:
     ports:
       - 5432:5432
   nginx:
-    build: ./nginx
+    image: nginx
     restart: always
     depends_on:
       - movieshare-api
     container_name: movieshare-proxy
     ports:
       - "80:80"
-
-
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    command: certonly --webroot -w /var/www/certbot --force-renewal --email hiroki11hanada@gmail.com -d www.mshare-api.com -d mshare-api.com --agree-tos
+    depends_on: 
+      - nginx
 # for production
