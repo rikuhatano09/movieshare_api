@@ -103,7 +103,50 @@ paths:
           description: "Update a movie by id"
           schema:
             $ref: "#/definitions/movieResponse"
+  /auth/login:
+    post:
+      parameters:
+        - name: "body"
+          in: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/loginPostRequestBody"
+      responses:
+        200:
+          description: "Create session cookie with firebase SDK"
+          schema:
+            $ref: "#/definitions/authResponse"
+      security:
+        - api_key: []
+  /auth/logout:
+    post:
+      responses:
+        200:
+          description: "Destroy session cookie with firebase SDK"
+      security:
+        - api_key: []
+  /auth/verify:
+    post:
+      responses:
+        200:
+          description: "verify session cookie with firebase SDK"
+          schema:
+            $ref: "#/definitions/authResponse"
+      security:
+        - api_key: []
 definitions:
+  loginPostRequestBody:
+    type: "object"
+    properties:
+      id:
+        type: string
+  authResponse:
+    type: "object"
+    properties:
+      status: 
+        type: "boolean"
+      user:
+        type: "object"
   movieResponse:
     type: "object"
     properties:
