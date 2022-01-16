@@ -7,13 +7,13 @@ services:
       - movieshare-db
     container_name: movieshare-api
     environment:
-      - GO_ENV=local
-      - DBMS=postgres
-      - DB_NAME=movieshare
-      - DB_HOST=host.docker.internal
-      - DB_PORT=5433
-      - DB_USER=postgres
-      - DB_PASSWORD=postgres
+      - "GO_ENV=${GO_ENV}"
+      - "DBMS=${DBMS}"
+      - "DB_NAME=${DB_NAME}"
+      - "DB_HOST=${DB_HOST}"
+      - "DB_PORT=${DB_PORT}"
+      - "DB_USER=${DB_USER}"
+      - "DB_PASSWORD=${DB_PASSWORD}"
     volumes:
       - ./movieshare_api:/go/src
     command: go run cmd/main.go
@@ -22,14 +22,39 @@ services:
       - "8000:8000"
   movieshare-db:
     image: postgres:latest
+    restart: always
+    hostname: movieshare-db
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=movieshare
+      - "POSTGRES_USER=${DB_USER}"
+      - "POSTGRES_PASSWORD=${DB_PASSWORD}"
+      - "POSTGRES_DB=${DB_NAME}"
     container_name: movieshare-db
     volumes:
       - ./movieshare_database/definition:/docker-entrypoint-initdb.d # Init database and insert initial data.
       - ./movieshare_database/data:/var/lib/postgresql/data # Preserve data.
     tty: true
     ports:
-      - 5433:5432
+      - 5432:5432
+  # nginx:
+  #   image: nginx
+  #   restart: always
+  #   depends_on:
+  #     - movieshare-api
+  #   container_name: movieshare-proxy
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+  #     - ./certbot/conf:/etc/letsencrypt
+  #     - ./certbot/www:/var/www/certbot
+  # certbot:
+  #   image: certbot/certbot
+  #   container_name: certbot
+  #   volumes:
+  #     - ./certbot/conf:/etc/letsencrypt
+  #     - ./certbot/www:/var/www/certbot
+  #   command: "certonly --webroot -w /var/www/certbot --force-renewal --email ${EMAIL} -d www.${DOMAIN} -d ${DOMAIN} --agree-tos"
+  #   depends_on: 
+  #     - nginx
+# for production
