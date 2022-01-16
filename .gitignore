@@ -20,3 +20,6 @@ movieshare_database/data
 certbot/
 *.pem
 .env
+nginx/
+
+docker-compose-production.yaml
