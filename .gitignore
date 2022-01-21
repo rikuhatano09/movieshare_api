@@ -17,6 +17,10 @@
 # Shared data
 movieshare_database/data
 
+#dev env
+.devcontainer
+
+# production env
 certbot/
 *.pem
 .env
