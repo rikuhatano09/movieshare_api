@@ -1,34 +1,43 @@
 package usecase
 
 import (
+	"github.com/gin-gonic/gin"
 	"github.com/rikuhatano09/movieshare_api/internal/infrastructure/authentication"
-	"github.com/rikuhatano09/movieshare_api/pkg/domain/contract"
 )
 
-func CreateSessionCookie(requestBody contract.LoginPostRequestBody) error {
-	authPersistance := authentication.NewAuthPersistance()
+func CreateSessionCookie(context *gin.Context) error {
+	authClient, err := authentication.NewAuthClient(context)
+	if err != nil {
+		return err
+	}
 
-	err := authPersistance.CreateSessionCookie(&requestBody.IdToken)
+	err = authClient.CreateSessionCookie(context)
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-func DestroySessionCookie() error {
-	authPersistance := authentication.NewAuthPersistance()
+func DestroySessionCookie(context *gin.Context) error {
+	authClient, err := authentication.NewAuthClient(context)
+	if err != nil {
+		return err
+	}
 
-	err := authPersistance.DestroySessionCookie()
+	err = authClient.DestroySessionCookie(context)
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-func VerifySessionCookie() error {
-	authPersistance := authentication.NewAuthPersistance()
+func VerifySessionCookie(context *gin.Context) error {
+	authClient, err := authentication.NewAuthClient(context)
+	if err != nil {
+		return err
+	}
 
-	err := authPersistance.VerifySessionCookie()
+	err = authClient.VerifySessionCookie(context)
 	if err != nil {
 		return err
 	}

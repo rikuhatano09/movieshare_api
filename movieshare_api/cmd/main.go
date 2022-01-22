@@ -45,6 +45,7 @@ func main() {
 	engine.GET("/movies/:id", handler.GetMovieByID)
 	engine.POST("/movies", handler.CreateMovie)
 	engine.PUT("/movies/:id", handler.PutMovie)
+	engine.POST("/auth/login", handler.LoginHandler)
 
 	engine.Run(":8000")
 }
