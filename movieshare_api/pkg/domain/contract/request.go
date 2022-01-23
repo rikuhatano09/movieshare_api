@@ -11,7 +11,7 @@ type (
 		YouTubeTitleID string `json:"youtubeTitleId"`
 	}
 
-	// MoviePostRequestBody is request body for creating a movie.
+	// MoviePutRequestBody is request body for updating a movie.
 	MoviePutRequestBody struct {
 		GrinningScore *uint32 `json:"grinningScore"`
 	}

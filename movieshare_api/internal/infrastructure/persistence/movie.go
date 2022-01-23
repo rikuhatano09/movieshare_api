@@ -69,7 +69,7 @@ func (moviePersistence MoviePersistence) GetMovieList(title *string, genre *stri
 	return movieList, nil
 }
 
-// GetMovieList get movies under the specified conditions.
+// CreateMovie create a movie.
 func (moviePersistence MoviePersistence) CreateMovie(movie model.Movie) (model.Movie, error) {
 	result := moviePersistence.Connection.New().
 		Table("movie").
@@ -98,7 +98,7 @@ func (moviePersistence MoviePersistence) FindMovieByID(id uint64) (model.Movie, 
 	return movie, nil
 }
 
-func (moviePersistence MoviePersistence) PutMovie(grinningScore *uint32, id uint64) (model.Movie, error) {
+func (moviePersistence MoviePersistence) UpdateMovie(grinningScore *uint32, id uint64) (model.Movie, error) {
 	movie := model.Movie{ID: id}
 	result := moviePersistence.Connection.New().
 		Model(&movie).

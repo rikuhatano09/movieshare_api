@@ -10,7 +10,6 @@ func GetMovieAtRandom(genre *string) (model.Movie, error) {
 	moviePersistence := persistence.NewMoviePersistence()
 
 	movie, error := moviePersistence.FindMovieAtRandom(genre)
-
 	if error != nil {
 		return model.Movie{}, error
 	}
@@ -21,7 +20,6 @@ func GetMovieList(title *string, genre *string, userId *string) ([]model.Movie, 
 	moviePersistence := persistence.NewMoviePersistence()
 
 	movieList, error := moviePersistence.GetMovieList(title, genre, userId)
-
 	if error != nil {
 		return []model.Movie{}, error
 	}
@@ -32,7 +30,6 @@ func GetMovieByID(id uint64) (model.Movie, error) {
 	moviePersistence := persistence.NewMoviePersistence()
 
 	movie, error := moviePersistence.FindMovieByID(id)
-
 	if error != nil {
 		return model.Movie{}, error
 	}
@@ -53,21 +50,18 @@ func CreateMovie(requestBody contract.MoviePostRequestBody) (model.Movie, error)
 	}
 
 	movie, error := moviePersistence.CreateMovie(movie)
-
 	if error != nil {
 		return model.Movie{}, error
 	}
 	return movie, nil
 }
 
-func PutMovie(requestBody contract.MoviePutRequestBody, id uint64) (model.Movie, error) {
+func UpdateMovie(requestBody contract.MoviePutRequestBody, id uint64) (model.Movie, error) {
 	moviePersistence := persistence.NewMoviePersistence()
 
-	movie, error := moviePersistence.PutMovie(requestBody.GrinningScore, id)
-
+	movie, error := moviePersistence.UpdateMovie(requestBody.GrinningScore, id)
 	if error != nil {
 		return model.Movie{}, error
 	}
 	return movie, nil
-
 }
