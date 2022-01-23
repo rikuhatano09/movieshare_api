@@ -31,7 +31,7 @@ func GetMovieList(title *string, genre *string, userId *string) ([]model.Movie, 
 func GetMovieByID(id uint64) (model.Movie, error) {
 	moviePersistence := persistence.NewMoviePersistence()
 
-	movie, error := moviePersistence.GetMovieByID(id)
+	movie, error := moviePersistence.FindMovieByID(id)
 
 	if error != nil {
 		return model.Movie{}, error

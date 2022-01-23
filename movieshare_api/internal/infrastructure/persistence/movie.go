@@ -81,7 +81,7 @@ func (moviePersistence MoviePersistence) CreateMovie(movie model.Movie) (model.M
 	return movie, nil
 }
 
-func (moviePersistence MoviePersistence) GetMovieByID(id uint64) (model.Movie, error) {
+func (moviePersistence MoviePersistence) FindMovieByID(id uint64) (model.Movie, error) {
 	movie := model.Movie{}
 
 	result := moviePersistence.Connection.New().
@@ -106,7 +106,7 @@ func (moviePersistence MoviePersistence) PutMovie(grinningScore *uint32, id uint
 	if result.Error != nil {
 		return movie, result.Error
 	}
-	movie, error := moviePersistence.GetMovieByID(id)
+	movie, error := moviePersistence.FindMovieByID(id)
 	if error != nil {
 		return movie, error
 	}
