@@ -20,7 +20,7 @@ type (
 	AuthActions interface {
 		CreateSessionCookie(*gin.Context)(error)
 		DestroySessionCookie(*gin.Context)(error)
-		VerifySessionCookie(*gin.Context)(error)
+		VerifySessionCookie(*gin.Context)(*auth.UserInfo, error)
 	}
 )
 
@@ -29,7 +29,7 @@ func NewAuthClient(context *gin.Context) (AuthActions, error) {
 	app := getFirebaseConnection()
 	client, err := app.Auth(context)
 	if err != nil {
-		return AuthClient{}, err
+		return AuthClient{}, errors.New("failed to create initiate client")
 	}
 	return AuthClient{
 		Client: client,
@@ -79,10 +79,54 @@ func (authClient AuthClient) CreateSessionCookie(context *gin.Context) error {
 
 // DestroySessionCookie destroys session cookie
 func (authClient AuthClient) DestroySessionCookie(context *gin.Context) error {
-	return errors.New("failed to create session cookie")
+	cookie, err := context.Cookie("session")
+	if err != nil {
+		return err 
+		// errors.New("not logged in, session cookie is unavailable")
+	}
+
+	// decode the cookie
+	decoded, err := authClient.Client.VerifySessionCookie(context, cookie)
+	if err != nil {
+		return errors.New("not logged in, session cookie invalid")
+	}
+
+	// revoke refresh token
+	if err:= authClient.Client.RevokeRefreshTokens(context, decoded.UID); err != nil {
+		return errors.New("failed to revoke refresh token")
+	}
+	
+	// clear session cookie
+	context.SetCookie(
+		"session",
+		"",
+		0,
+		"/",
+		"",
+		true,
+		true,
+	)
+	return nil
 }
 
 // VerifySessionCookie verifies session cookie attached to the request
-func (authClient AuthClient) VerifySessionCookie(context *gin.Context) error {
-	return errors.New("failed to create session cookie")
+func (authClient AuthClient) VerifySessionCookie(context *gin.Context) (*auth.UserInfo, error) {
+
+	cookie, err := context.Cookie("session")
+	if err != nil {
+		return nil, errors.New("not logged in, session cookie is unavailable")
+	}
+
+	// verify and check if the session cookie is revoked
+	decoded, err := authClient.Client.VerifySessionCookieAndCheckRevoked(context, cookie)
+	if err != nil {
+		return nil, errors.New("verification did not pass")
+	}
+
+	// retrieve user info using uid in the token
+	user, err := authClient.Client.GetUser(context, decoded.UID)
+	if err != nil {
+		return nil, errors.New("failed to retrieve user information")
+	}
+	return user.UserInfo, nil 
 }

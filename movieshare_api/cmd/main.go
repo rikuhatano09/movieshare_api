@@ -32,6 +32,7 @@ func main() {
 			"Accept-Encoding",
 			"Authorization",
 		},
+		AllowCredentials: true,
 		MaxAge: 24 * time.Hour,
 	}))
 
@@ -46,6 +47,8 @@ func main() {
 	engine.POST("/movies", handler.CreateMovie)
 	engine.PUT("/movies/:id", handler.PutMovie)
 	engine.POST("/auth/login", handler.LoginHandler)
+	engine.POST("/auth/logout", handler.LogoutHandler)
+	engine.POST("/auth/verify", handler.VerificationHandler)
 
 	engine.Run(":8000")
 }

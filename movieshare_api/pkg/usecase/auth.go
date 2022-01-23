@@ -1,6 +1,7 @@
 package usecase
 
 import (
+	"firebase.google.com/go/auth"
 	"github.com/gin-gonic/gin"
 	"github.com/rikuhatano09/movieshare_api/internal/infrastructure/authentication"
 )
@@ -31,15 +32,15 @@ func DestroySessionCookie(context *gin.Context) error {
 	return nil
 }
 
-func VerifySessionCookie(context *gin.Context) error {
+func VerifySessionCookie(context *gin.Context) (*auth.UserInfo, error) {
 	authClient, err := authentication.NewAuthClient(context)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	err = authClient.VerifySessionCookie(context)
+	userInfo, err := authClient.VerifySessionCookie(context)
 	if err != nil {
-		return err
+		return nil, err
 	}
-	return nil
+	return userInfo, nil
 }
