@@ -1,6 +1,8 @@
 package persistence
 
 import (
+	"fmt"
+
 	"github.com/jinzhu/gorm"
 
 	"github.com/rikuhatano09/movieshare_api/pkg/domain/model"
@@ -98,18 +100,23 @@ func (moviePersistence MoviePersistence) FindMovieByID(id uint64) (model.Movie, 
 	return movie, nil
 }
 
-func (moviePersistence MoviePersistence) UpdateMovie(grinningScore *uint32, id uint64) (model.Movie, error) {
+func (moviePersistence MoviePersistence) UpdateMovie(attributes map[string]interface{}, id uint64) (model.Movie, error) {
 	movie := model.Movie{ID: id}
+
 	result := moviePersistence.Connection.New().
 		Model(&movie).
-		Update("grinning_score", grinningScore)
+		Updates(attributes)
+
+	if result.RowsAffected == 0 {
+		return movie, fmt.Errorf("record [ID: %d] does not exists", id)
+	}
 	if result.Error != nil {
 		return movie, result.Error
 	}
+	// Find a movie by ID for sending a response.
 	movie, error := moviePersistence.FindMovieByID(id)
 	if error != nil {
 		return movie, error
 	}
-
 	return movie, nil
 }

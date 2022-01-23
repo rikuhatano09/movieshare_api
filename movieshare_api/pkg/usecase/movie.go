@@ -59,7 +59,11 @@ func CreateMovie(requestBody contract.MoviePostRequestBody) (model.Movie, error)
 func UpdateMovie(requestBody contract.MoviePutRequestBody, id uint64) (model.Movie, error) {
 	moviePersistence := persistence.NewMoviePersistence()
 
-	movie, error := moviePersistence.UpdateMovie(requestBody.GrinningScore, id)
+	attributes := map[string]interface{}{
+		"GrinningScore": requestBody.GrinningScore,
+	}
+
+	movie, error := moviePersistence.UpdateMovie(attributes, id)
 	if error != nil {
 		return model.Movie{}, error
 	}
